@@ -1,0 +1,81 @@
+<!--
+     WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE 
+     OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+       virsh edit BJ-VM-23-8-10
+       or other application using the libvirt API.
+-->
+<domain type='kvm'>
+  <name>test</name>
+  <uuid>13ef9ecc-3f87-43a7-349a-61c74cdcfa61</uuid>
+  <memory unit='KiB'>7864320</memory>
+  <currentMemory unit='KiB'>7864320</currentMemory>
+  <vcpu placement='static'>4</vcpu>
+  <os>
+    <type arch='x86_64' machine='rhel6.4.0'>hvm</type>
+    <smbios mode='sysinfo'/>
+    <boot dev='hd'/>
+  </os>
+  <sysinfo type='smbios'>
+    <bios>
+    <entry name='vendor'>WANGYIN</entry>
+    </bios>
+    <system>
+      <entry name='manufacturer'>WangYin</entry>
+      <entry name='product'>WY-KVM-VM</entry>
+      <entry name='serial'>11111111</entry>
+    </system>
+  </sysinfo>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+  <clock offset='utc'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>restart</on_crash>
+  <devices>
+    <emulator>/usr/libexec/qemu-kvm</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2' cache='none'/>
+      <source file='/export/kvm/test.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+      <alias name='virtio-disk0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+    </disk>
+    <controller type='usb' index='0'>
+      <alias name='usb0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x2'/>
+    </controller>
+    <interface type='bridge'>
+      <mac address='52:54:00:93:58:73'/>
+      <source bridge='br0'/>
+      <target dev='vnet0'/>
+      <model type='virtio'/>
+      <alias name='net0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    </interface>
+    <serial type='pty'>
+      <source path='/dev/pts/1'/>
+      <target port='0'/>
+      <alias name='serial0'/>
+    </serial>
+    <console type='pty' tty='/dev/pts/1'>
+      <source path='/dev/pts/1'/>
+      <target type='serial' port='0'/>
+      <alias name='serial0'/>
+    </console>
+    <input type='tablet' bus='usb'>
+      <alias name='input0'/>
+    </input>
+    <graphics type='vnc' port='-1' autoport='yes' listen='0.0.0.0'>
+          <listen type='address' address='0.0.0.0'/>
+    </graphics>
+    <memballoon model='virtio'>
+      <alias name='balloon0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
+    </memballoon>
+  </devices>
+  <seclabel type='none'/>
+</domain>
+
